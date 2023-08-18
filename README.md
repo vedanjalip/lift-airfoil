@@ -76,37 +76,21 @@ Angle of attack                      = 0 degrees
 ## Repository structure
 ```
 |-------README.md
+|-------lookup-table.md
 |-------src
          |--------v1
-         |        |-------lift-per-span.c
+         |        |-------src
+         |        |        |-------lift-per-span.c
+         |        |
          |        |-------README.md
          |
          |--------v2
-                  |-------lift-per-span-with-distributions.c
+                  |-------src
+                  |        |-------lift-per-span-with-distributions.c
+                  |
                   |-------README.md
 
 ```
-
-## Parameter values
-The inputs and their ranges are:
--	`ambientTemperature`: 281.65 K
--	`ambientPressure`   : 88375.17 Pa
--	`chordLength`       : 0.095 to 0.15
--	`deltaColumnHeight` : 0.056 to 0.109
-
-The empirical data[^2] represented in ```lookup-table.md``` is used to estimate the value of lift coefficient based on the value of Reynolds number. The estimation is done using a combination of linear and parabolic interpolation. The resultant interpolated values are used to inject a uniform distribution for lift coefficient.
-
-## Parameter values
-
--	`ambientTemperature`: 281.65 K
--	`ambientPressure`   : 88375.17 Pa
--	`chordLength`       : 0.1
--	`deltaColumnHeight` : 0.1
-
-The empirical data[^2] represented in ```lookup-table.md``` is used to estimate the value of lift coefficient based on the value of Reynolds number. The estimation is done using a combination of linear and parabolic interpolation. The mean of the resultant interpolated value is chosen to be the lift coefficient.
-
-## Outputs
-
 
 
 [^1]: https://m-selig.ae.illinois.edu/ads/afplots/naca23012.gif
