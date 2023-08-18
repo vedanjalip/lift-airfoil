@@ -4,15 +4,15 @@ This project estimates the lift force per unit wingspan acting on an airfoil (NA
 ![NACA 23012 12%](naca23012%20(1).gif) 
 
 ## Model
-For this project, the Bernoulli principle had been used to determine the lift force. The principle states that the difference in the velocity of fluid flowing over the upper and lower surfaces of the airfoil generates a pressure difference between the two surfaces. As a result, the airfoil experiences lift.  
+For this project, the Bernoulli principle had been used to determine the lift force. The principle states that the difference in the velocity of fluid flowing over the upper and lower surfaces of a body generates a pressure difference between the two surfaces. As a result, the airfoil experiences lift.  
 
 The lift force per unit wingspan (span) of the airfoil can be estimated using the following equation:
 
 ```
 Lift per unit span = 0.5  * Cl * rho_air * v^2 * c
 ```
- rho_air     : density of air at chosen elevation above sea level <br>
-      v      : True air speed  <br>
+ rho_air     : density of air at a chosen elevation above sea level <br>
+      v      : True airspeed  <br>
       Cl     : Lift coefficient  <br>
       c      : Length of the chord for chosen airfoil  <br>
 
@@ -22,7 +22,7 @@ Wingspan is the length of the lateral extent of the airfoil.
 
 ## Parameters
 The estimation of lift per unit wingspan requires the direct/indirect consideration of several factors such as,
-1. **Lift coefficient (Cl)**: This is a dimensionless quantity which is representative of the aerodynamical parameters of the airfoil. It is generally estimated experimentally for specific airfoils in wind tunnels. In this project, non-uniform empirical data has been obtained[^2]. The values for lift coefficient chosen are for the above mentioned airfoil, for a fixed angle of attack (zero degrees), fixed Mach number and varying values of the Reynolds Number(Re).
+1. **Lift coefficient (Cl)**: This is a dimensionless quantity which is representative of the aerodynamical parameters of the airfoil. It is generally estimated experimentally for specific airfoils in wind tunnels. In this project, non-uniform empirical data has been obtained[^2]. The values for the lift coefficient chosen are for the above-mentioned airfoil, for a fixed angle of attack (zero degrees), fixed Mach number and varying values of the Reynolds Number(Re).
 2. **Chord length (c)**: It represents the horizontal length of the cross section of the airfoil. For this particular airfoil, the value is taken to be 0.1m taking into account the parameters chosen while obtaining the empirical data for the lift coefficient.
 3. **Air density (rho_air)**: The density of air decreases with increase in elevation from sea level (altitude). Here, the air density is being computed using the corresponding values of ambient temperature and pressure for the chosen altitude obtained from the International Standard Atmosphere (ISA) data.
 4. **Liquid column height change (deltaColumnHeight)**: This is the change in the level of top of the liquid in the column in the Pitot tube. The level of the liquid changes with changing TAS.
@@ -33,7 +33,7 @@ The estimation of lift per unit wingspan requires the direct/indirect considerat
       TAS = sqrt  [ -------------------------------------------]
                   (                   rho_air                  )
 ```
-7. **Dynamic viscosity**: It is a quantitity used to characterise the resistance to flow of a fluid under an applied force. It is mathematically expressed as,
+7. **Dynamic viscosity**: It is a quantity used to characterise the resistance to the flow of a fluid under an applied force. It is mathematically expressed as,
 
    ```
                             Shear stress
@@ -41,7 +41,7 @@ The estimation of lift per unit wingspan requires the direct/indirect considerat
                              Shear rate
    ```
    
-   where shear stress is the force applied on the fluid per unit area and shear rate is the velocity gradient of fluid          perpendicular to the fluid flow direction. For the sake of simplicity, this velocity gradient has been considered to be a    constant value. However, the dependence of dynamic viscosity on ambient temperature has been taken into account since the    former depends strongly on temperature. The Sutherland model has been used to calculate dynamic viscosity.
+   where shear stress is the force applied on the fluid per unit area and shear rate is the velocity gradient of fluid          perpendicular to the fluid flow direction. For the sake of simplicity, this velocity gradient has been considered to be a    constant value. However, the dependence of dynamic viscosity on ambient temperature has been considered since the    former depends strongly on temperature. The Sutherland model has been used to calculate dynamic viscosity.
 
    ```
                                mu_ref * (T_ref + S)
@@ -51,9 +51,9 @@ The estimation of lift per unit wingspan requires the direct/indirect considerat
    
    mu_ref : dynamic viscosity at the reference temperature (T_ref) <br>
    T_ref  : reference temperature (273.15 K) <br>
-   S      : Sutherland constant determined experimentally for various gases
+   S      : Sutherland constant determined experimentally for dry air
    
-6. **Reynolds Number**: It is used to characterise the type of flow of a fluid over a surface. The value of Reynolds number may indicate if a flow regime is laminar or turbulent or a transition between the two. This gives information about the behaviour of streamlines in the flow. The empirical data obtained[^2] points to the variation of the lift coefficient for various values of Reynolds number. It is calculated as follows:
+6. **Reynolds Number**: It is used to characterise the type of flow of a fluid over a surface. The value of Reynolds number may indicate if a flow regime is laminar or turbulent or a transition between the two. This gives information about the behaviour of streamlines in the flow. The empirical data obtained[^2] points to the variation of the lift coefficient for various values of the Reynolds number. It is calculated as follows:
    ```
                         rho_air * TAS * c
    Reynolds number =  ---------------------
