@@ -12,12 +12,12 @@ const double densityLiquid = 1000;  //  Liquid inside Pitot tube column
 
 void loadInputs(double* altitude, double* ambientTemperature, double* ambientPressure, double* chordLength, double* deltaColumnHeight)
 {
-    *altitude = 10.0;
+    *altitude = 1000.0;
     *ambientTemperature = 281.65;   // ISA 
-    *ambientPressure = 88375.17;     // ISA
+    *ambientPressure = 89859.7;     // ISA
    
-    *chordLength = UxHwDoubleUniformDist(0.095,0.15);
-    *deltaColumnHeight = UxHwDoubleUniformDist(0.056,0.109);
+    *chordLength = UxHwDoubleUniformDist(0.095,0.105);
+    *deltaColumnHeight = UxHwDoubleUniformDist(0.095,0.105);
 
 }
 
