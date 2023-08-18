@@ -12,6 +12,7 @@ const double densityLiquid = 1000;  //  Liquid inside Pitot tube column
 
 void loadInputs(double* altitude, double* ambientTemperature, double* ambientPressure, double* chordLength, double* deltaColumnHeight)
 {
+   // This function assign values for the parameters of the model. It injects a uniform distribution to characterise the potential uncertainty in the measurement of the chord length of airfoil and the change in the height of the Pitot tube's liquid column.
     *altitude = 1000.0;
     *ambientTemperature = 281.65;   // ISA 
     *ambientPressure = 89859.7;     // ISA
@@ -23,6 +24,8 @@ void loadInputs(double* altitude, double* ambientTemperature, double* ambientPre
 
 double getDensity(double ambientTemperature, double ambientPressure)
 {
+    // This function returns the value of air density at the chosen ambient temperature and pressure.
+   
     double density;
     density = ambientPressure / (R * ambientTemperature);
     printf("\n Density = %f", density);
@@ -31,8 +34,13 @@ double getDensity(double ambientTemperature, double ambientPressure)
 
 double getReynoldsNumber(double density, double velocity, double chordLength, double ambientTemperature)
 {
+    // This function returns the value of the Reynolds number given the air density, true airspeed, chord length of the airfoil and ambient temperature.
+    
     double dynamicViscosity;
+   
+    // Dynamic viscosity is calculated as followed per the Sutherland model, given the ambient temperature.
     // mu(T) = mu_0 * (T_0 + S) / (T + S) * (T / T_0)^(3/2)
+   
     double S = 110.00;
     double mu_0 = 1.789E-5;
     double T_0 = 273.15;
@@ -44,10 +52,9 @@ double getReynoldsNumber(double density, double velocity, double chordLength, do
 
 double getCL(double ReynoldsNumber)
 {  
-    // Cl : Lift coefficient
-    // Data obtained from: http://airfoiltools.com/airfoil/details?airfoil=naca23012-il#polars
-    // Making use of a Lookup table for given airfoil; fixed Mach number and angle of attack (= zero degrees)
-    // Estimation of lift coefficient by linear interpolation/extrapolation on non-uniform empirical data
+    // The relevant empirical data has been obtained from http://airfoiltools.com/airfoil/details?airfoil=naca23012-il#polars
+    // A lookup table was made and used as a reference for the chosen airfoil for a fixed Mach number and angle of attack (= zero degrees)
+    // This function estimates the lift coefficient by linear interpolation/extrapolation on non-uniform empirical data (see ```lookup-table.md```)
     
     // ReyNum[] = {50000, 100000, 200000, 500000, 1000000};
     // Cl[] = {0.0256, 0.2908, 0.1833, 0.1175, 0.1241};
@@ -195,8 +202,9 @@ double getCL(double ReynoldsNumber)
 
 double getVelocity(double deltaColumnHeight, double densityAir)
 {
+    // This function returns the true airspeed of airfoil given the density of air and the change in column height of the liquid in the Pitot tube.
+   
     double v;
-
     v = sqrt(2 * g * deltaColumnHeight * (densityLiquid/densityAir));
     printf("\n Velocity = %f", v);
     return v;
@@ -205,6 +213,8 @@ double getVelocity(double deltaColumnHeight, double densityAir)
 
 double getLift(double altitude, double ambientTemperature, double ambientPressure, double deltaColumnHeight, double chordLength)
 {
+    // This function returns the lift force generated per unit wingspan of the airfoil given the ambient temperature, ambient pressure, change in liquid column height in Pitot tube and the chord length of the airfoil.
+    
     double densityAir, liftCoefficient, lift, reynoldsNumber, velocity;
     densityAir = getDensity(ambientTemperature,ambientPressure);
     velocity = getVelocity(deltaColumnHeight, densityAir);
