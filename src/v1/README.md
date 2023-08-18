@@ -1,7 +1,7 @@
 ## Parameter values
 
 -	`ambientTemperature`: 281.65 K
--	`ambientPressure`   : 88375.17 Pa
+-	`ambientPressure`   : 89859.70 Pa
 -	`chordLength`       : 0.1
 -	`deltaColumnHeight` : 0.075
 
